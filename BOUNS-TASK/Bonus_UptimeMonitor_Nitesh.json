@@ -1,0 +1,147 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://demo.realworld.show/",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -848,
+        16
+      ],
+      "id": "c828757b-90a6-4498-b38e-def372c5d7eb",
+      "name": "HTTP Request2",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "alwaysOutputData": false,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2da2ec2e-223f-4ea2-893f-766613a5ddb1",
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 200,
+              "operator": {
+                "type": "number",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -624,
+        -32
+      ],
+      "id": "40482cf1-3528-4ffd-8ac9-1146305aade2",
+      "name": "If1",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "5216193683",
+        "text": "=🚨 Website Down Alert  URL: https://demo.realworld.show  Status Code: {{$json.statusCode}}  Time: {{$now}}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -336,
+        32
+      ],
+      "id": "1513391b-b054-4bf1-b80e-1adb4bc0f92a",
+      "name": "Send a text message2",
+      "webhookId": "3ca2e4f3-1031-4a5f-836e-af2e6f585d8f",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "credentials": {
+        "telegramApi": {
+          "id": "cEpd52RbFGeRnlVe",
+          "name": "Telegram account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1120,
+        16
+      ],
+      "id": "ed76449b-0299-443a-a35b-2bb41d6978fb",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "connections": {
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "d4cf968098f5828263526c395125dd16be65bfce11e1097945dbd9c2116ef095"
+  }
+}
