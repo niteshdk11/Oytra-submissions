@@ -4,7 +4,13 @@
 
 This repository contains my submission for the Automation & QA Developer Take-Home Assessment.
 
-### Task 1 – QA Debug Report
+**GitHub Repository:**
+https://github.com/niteshdk11/Oytra-submissions
+
+**Loom Video Walkthrough:**
+https://drive.google.com/file/d/1bciRQa3evVQ3N3eGP0PdmmPpYUgHEB-f/view?usp=sharing
+
+## Task 1 – QA Debug Report
 
 I performed manual exploratory testing on the RealWorld Conduit Demo Application. The testing covered user registration, authentication, article creation, article editing, article deletion, profile management, and input validation.
 
@@ -18,7 +24,7 @@ A total of five issues were identified and documented with:
 
 A root cause analysis was also provided for one selected issue.
 
-### Task 2 – n8n API Integration Workflow
+## Task 2 – n8n API Integration Workflow
 
 An automated workflow was built in n8n using the GitHub REST API.
 
@@ -31,7 +37,7 @@ Workflow functionality:
 5. Sends a formatted digest to Telegram.
 6. Implements retry and error-handling mechanisms to improve workflow reliability.
 
-### Bonus Task – Uptime Monitor
+## Bonus Task – Uptime Monitor
 
 A second n8n workflow was created to monitor the availability of the RealWorld Conduit Demo Application.
 
